@@ -1,0 +1,17 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-ibm: 'IBM Plex Sans', serif;
+  --font-logo: 'Hammersmith One', sans-serif;
+  --color-custom-blue-1: #0a3981;
+  --color-custom-blue-2: #3674b5;
+  --color-custom-blue-3: #578fca;
+  --color-custom-blue-4: #a1e3f9;
+  --color-white-smoke: #f6f5f4;
+  --color-arsenic: #11181c;
+}
+
+body {
+  font-family: var(--font-ibm);
+  color: var(--color-arsenic);
+}
