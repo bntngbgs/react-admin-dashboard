@@ -6,6 +6,8 @@ import { BiCategoryAlt } from 'react-icons/bi';
 import { FiUsers } from 'react-icons/fi';
 import { LiaClipboardListSolid } from 'react-icons/lia';
 import { RiLogoutBoxRLine } from 'react-icons/ri';
+import { RiListIndefinite } from 'react-icons/ri';
+import { NavLink } from 'react-router';
 
 const Sidebar = () => {
   return (
@@ -22,29 +24,29 @@ const Sidebar = () => {
         />
       </div>
       <div className="mt-16 border-b-2 border-white-smoke pb-8">
-        <div className="flex items-center gap-4 text-white-smoke cursor-pointer">
+        <NavLink to="/" className="nav-link">
           <LuLayoutDashboard size={30} />
-          <p className="text-xl">Dashboard</p>
-        </div>
-        <div className="flex items-center gap-4 text-white-smoke cursor-pointer mt-8">
-          <BsBoxSeam size={30} />
-          <p className="text-xl">Products</p>
-        </div>
-        <div className="flex items-center gap-4 text-white-smoke cursor-pointer mt-8">
-          <BiCategoryAlt size={30} />
-          <p className="text-xl">Categories</p>
-        </div>
-        <div className="flex items-center gap-4 text-white-smoke cursor-pointer mt-8">
+          <p className="text-lg">Dashboard</p>
+        </NavLink>
+        <NavLink to="products" className="nav-link mt-3">
+          <BsBoxSeam size={28} />
+          <p className="text-lg">Products</p>
+        </NavLink>
+        <NavLink to="categories" className="nav-link mt-3">
+          <RiListIndefinite size={32} />
+          <p className="text-lg">Categories</p>
+        </NavLink>
+        <NavLink to="orders" className="nav-link mt-3">
           <LiaClipboardListSolid size={32} />
-          <p className="text-xl">Orders</p>
-        </div>
-        <div className="flex items-center gap-4 text-white-smoke cursor-pointer mt-8">
+          <p className="text-lg">Orders</p>
+        </NavLink>
+        <NavLink to="users" className="nav-link mt-3">
           <FiUsers size={30} />
-          <p className="text-xl">Users</p>
-        </div>
+          <p className="text-lg">Users</p>
+        </NavLink>
       </div>
       <div className="mt-8 mx-auto flex justify-center">
-        <button className="w-full flex gap-3 items-center justify-center rounded bg-red-700 text-white-smoke px-6 py-2.5">
+        <button className="btn-logout">
           <RiLogoutBoxRLine size={24} />
           <span className="text-xl">Logout</span>
         </button>
