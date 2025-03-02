@@ -2,16 +2,23 @@ import { MdInsertChart } from 'react-icons/md';
 import { FaArrowCircleLeft } from 'react-icons/fa';
 import { LuLayoutDashboard } from 'react-icons/lu';
 import { BsBoxSeam } from 'react-icons/bs';
-import { BiCategoryAlt } from 'react-icons/bi';
 import { FiUsers } from 'react-icons/fi';
 import { LiaClipboardListSolid } from 'react-icons/lia';
 import { RiLogoutBoxRLine } from 'react-icons/ri';
 import { RiListIndefinite } from 'react-icons/ri';
 import { NavLink } from 'react-router';
+import { useContext } from 'react';
+import { SidebarContext } from '../context/SidebarContext';
 
 const Sidebar = () => {
+  const { isOpen, setIsOpen } = useContext(SidebarContext);
+
   return (
-    <div className="p-4 bg-custom-blue-1 h-screen hidden lg:block">
+    <div
+      className={`${
+        isOpen ? 'transform translate-x-0' : 'transform -translate-x-full'
+      } absolute transform -translate-x-full lg:translate-x-0 lg:static p-4 bg-custom-blue-1 min-h-screen lg:block transition ease-in-out duration-300`}
+    >
       <div className="flex items-center gap-2">
         <MdInsertChart size={40} color={'#a1e3f9'} />
         <h1 className="text-2xl text-white-smoke font-bold mr-5">
@@ -20,7 +27,8 @@ const Sidebar = () => {
         <FaArrowCircleLeft
           size={26}
           color={'#f6f5f4'}
-          className="cursor-pointer md:hidden"
+          className="cursor-pointer lg:hidden"
+          onClick={() => setIsOpen(false)}
         />
       </div>
       <div className="mt-16 border-b-2 border-white-smoke pb-8">

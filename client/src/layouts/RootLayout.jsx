@@ -4,7 +4,7 @@ import Header from '../components/Header';
 
 const RootLayout = () => {
   return (
-    <main className="flex">
+    <main className="flex relative">
       <Sidebar />
       <div className="flex-1">
         <Header />

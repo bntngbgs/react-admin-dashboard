@@ -1,11 +1,19 @@
 import { LuCircleUser } from 'react-icons/lu';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { IoMenu } from 'react-icons/io5';
+import { useContext } from 'react';
+import { SidebarContext } from '../context/SidebarContext';
 
 const Header = () => {
+  const { setIsOpen } = useContext(SidebarContext);
+
   return (
-    <header className="shadow-lg flex w-full items-center p-2 py-4 sm:px-4">
-      <IoMenu size={30} className="text-arsenic lg:hidden" />
+    <header className="shadow-lg flex w-full items-center p-2 py-4 sm:px-4 md:px-8">
+      <IoMenu
+        size={30}
+        className="text-arsenic lg:hidden"
+        onClick={() => setIsOpen(true)}
+      />
       <h1 className="font-logo text-xl sm:text-2xl md:text-3xl text-custom-blue-1 mx-auto mt-0.5">
         YOUR MARKETPLACE
       </h1>

@@ -4,7 +4,7 @@ import { FaChevronRight } from 'react-icons/fa';
 
 const Pagination = () => {
   return (
-    <div className="w-full mt-6 flex items-center gap-4 justify-end">
+    <div className="w-full mt-6 flex items-center gap-4 justify-center md:justify-end">
       <FaChevronLeft
         size={18}
         className="text-custom-blue-1 cursor-pointer hover:text-blue-200 transition ease-in-out duration-300"
