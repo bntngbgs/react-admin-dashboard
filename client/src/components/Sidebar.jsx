@@ -17,11 +17,11 @@ const Sidebar = () => {
     <div
       className={`${
         isOpen ? 'transform translate-x-0' : 'transform -translate-x-full'
-      } absolute transform -translate-x-full lg:translate-x-0 lg:static p-4 bg-custom-blue-1 min-h-screen lg:block transition ease-in-out duration-300`}
+      } absolute transform -translate-x-full lg:translate-x-0 lg:static p-4 bg-custom-blue-1 min-h-full h-screen lg:block transition ease-in-out duration-300`}
     >
       <div className="flex items-center gap-2">
         <MdInsertChart size={40} color={'#a1e3f9'} />
-        <h1 className="text-2xl text-white-smoke font-bold mr-5">
+        <h1 className="text-[22px] sm:text-2xl text-white-smoke font-bold mr-5">
           Admin Dashboard
         </h1>
         <FaArrowCircleLeft

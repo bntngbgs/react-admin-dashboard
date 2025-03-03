@@ -1,4 +1,4 @@
-const Table = ({ columns }) => {
+const Table = ({ columns, data, children }) => {
   return (
     <table className="min-w-full font-ibm">
       <thead className="bg-custom-blue-4">
@@ -22,7 +22,21 @@ const Table = ({ columns }) => {
         </tr>
       </thead>
       <tbody>
-        <tr className="text-center">
+        {columns.map((_, index) => (
+          <tr className="text-center even:bg-gray-50" key={index}>
+            {/* <td className="py-4 whitespace-nowrap">CD037</td>
+            <td className="py-4 whitespace-nowrap">Baju Kemeja Flanel XL</td>
+            <td className="py-4 whitespace-nowrap">Rp. 129.000</td>
+            <td className="py-4 whitespace-nowrap">Pakaian</td>
+            <td className="py-4 whitespace-nowrap">01 Maret 2025</td>
+            <td className="py-4 whitespace-nowrap">01 Maret 2025</td> */}
+            {data.map((item) => (
+              <td className="py-4 whitespace-nowrap">{item}</td>
+            ))}
+            {children}
+          </tr>
+        ))}
+        {/*   <tr className="text-center">
           <td className="py-4 whitespace-nowrap">CD037</td>
           <td className="py-4 whitespace-nowrap">Baju Kemeja Flanel XL</td>
           <td className="py-4 whitespace-nowrap">Rp. 129.000</td>
@@ -85,7 +99,7 @@ const Table = ({ columns }) => {
           <td className="py-4 whitespace-nowrap">Pakaian</td>
           <td className="py-4 whitespace-nowrap">01 Maret 2025</td>
           <td className="py-4 whitespace-nowrap">01 Maret 2025</td>
-        </tr>
+        </tr> */}
       </tbody>
     </table>
   );

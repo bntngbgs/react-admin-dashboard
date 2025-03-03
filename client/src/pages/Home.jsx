@@ -33,6 +33,15 @@ const columns = [
   },
 ];
 
+const tableData = [
+  'CD037',
+  'Baju Kemeja Flanel XL',
+  'Rp. 129.000',
+  'Pakaian',
+  '01 Maret 2025',
+  '01 Maret 2025',
+];
+
 const Home = () => {
   return (
     <section className="px-4 md:px-8">
@@ -54,7 +63,7 @@ const Home = () => {
         Recent Products
       </h1>
       <div className="overflow-auto rounded @container shadow-md">
-        <Table columns={columns} />
+        <Table columns={columns} data={tableData} />
       </div>
       <Pagination />
     </section>
