@@ -34,7 +34,7 @@ const Dropdown = () => {
       </div>
 
       <div
-        className={`absolute right-0 z-10 mt-4 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 focus:outline-hidden ${
+        className={`absolute w-full right-0 z-10 mt-4 sm:w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 focus:outline-hidden ${
           isMenuOpen ? 'block' : 'hidden'
         }`}
         role="menu"
