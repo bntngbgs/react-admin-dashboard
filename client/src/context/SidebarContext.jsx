@@ -1,8 +1,8 @@
 import { createContext, useState } from 'react';
 
-export const SidebarContext = createContext();
+const SidebarContext = createContext();
 
-const SidebarContextProvider = ({ children }) => {
+export const SidebarContextProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -12,4 +12,4 @@ const SidebarContextProvider = ({ children }) => {
   );
 };
 
-export default SidebarContextProvider;
+export default SidebarContext;

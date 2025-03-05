@@ -2,7 +2,7 @@ import { LuCircleUser } from 'react-icons/lu';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { IoMenu } from 'react-icons/io5';
 import { useContext } from 'react';
-import { SidebarContext } from '../context/SidebarContext';
+import SidebarContext from '../context/SidebarContext';
 
 const Header = () => {
   const { setIsOpen } = useContext(SidebarContext);

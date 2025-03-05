@@ -4,7 +4,7 @@ const UserForm = () => {
       <h1 className="text-3xl text-center font-bold text-custom-blue-2">
         Add Users
       </h1>
-      <form className="max-w-lg mx-auto mt-3 sm:mt-8">
+      <form className="max-w-lg mx-auto mt-3 sm:mt-6">
         <label htmlFor="name" className="text-lg">
           <p className="mb-0.5 mt-3">Name :</p>
           <input

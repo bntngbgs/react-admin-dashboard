@@ -8,7 +8,7 @@ import { RiLogoutBoxRLine } from 'react-icons/ri';
 import { RiListIndefinite } from 'react-icons/ri';
 import { NavLink } from 'react-router';
 import { useContext } from 'react';
-import { SidebarContext } from '../context/SidebarContext';
+import SidebarContext from '../context/SidebarContext';
 
 const Sidebar = () => {
   const { isOpen, setIsOpen } = useContext(SidebarContext);
