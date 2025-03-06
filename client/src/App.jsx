@@ -10,31 +10,35 @@ import CategoryForm from './components/CategoryForm';
 import OrderForm from './components/OrderForm';
 import UserForm from './components/UserForm';
 import Login from './pages/Login';
+import ProtectedRoutes from './components/utils/ProtectedRoutes';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         {/* Protected Routes */}
-        <Route element={<DashboardLayout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="products">
-            <Route index element={<Products />} />
-            <Route path="add" element={<ProductsForm />} />
-          </Route>
-          <Route path="categories">
-            <Route index element={<Categories />} />
-            <Route path="add" element={<CategoryForm />} />
-          </Route>
-          <Route path="orders">
-            <Route index element={<Orders />} />
-            <Route path="add" element={<OrderForm />} />
-          </Route>
-          <Route path="users">
-            <Route index element={<Users />} />
-            <Route path="add" element={<UserForm />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route element={<DashboardLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="products">
+              <Route index element={<Products />} />
+              <Route path="add" element={<ProductsForm />} />
+            </Route>
+            <Route path="categories">
+              <Route index element={<Categories />} />
+              <Route path="add" element={<CategoryForm />} />
+            </Route>
+            <Route path="orders">
+              <Route index element={<Orders />} />
+              <Route path="add" element={<OrderForm />} />
+            </Route>
+            <Route path="users">
+              <Route index element={<Users />} />
+              <Route path="add" element={<UserForm />} />
+            </Route>
           </Route>
         </Route>
+
         {/* Protected Routes */}
 
         <Route path="/login" element={<Login />} />
