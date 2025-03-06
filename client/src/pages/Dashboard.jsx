@@ -42,7 +42,7 @@ const tableData = [
   '01 Maret 2025',
 ];
 
-const Home = () => {
+const Dashboard = () => {
   return (
     <section className="px-4 md:px-8">
       <div className="mt-8 sm:mt-10 flex flex-wrap gap-3 sm:gap-4">
@@ -69,4 +69,4 @@ const Home = () => {
     </section>
   );
 };
-export default Home;
+export default Dashboard;
