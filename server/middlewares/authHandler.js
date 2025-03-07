@@ -18,7 +18,7 @@ const authorize = async (req, res, next) => {
     const user = await User.findById(decodedToken.userId);
 
     if (!user) {
-      const error = new Error('Invalid token');
+      const error = new Error('Forbidden');
       error.statusCode = 403;
       throw error;
     }

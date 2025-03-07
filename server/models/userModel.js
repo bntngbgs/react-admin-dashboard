@@ -30,6 +30,7 @@ const userSchema = new mongoose.Schema(
       required: [true, 'Address field is required'],
       minLength: [10, 'Address length must have at least 10 characters'],
     },
+    refresh_token: String,
   },
   { timestamps: true }
 );

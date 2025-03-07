@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import connectDB from './utils/dbConnection.js';
-import userRoutes from './routes/userRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 import errorHandler from './middlewares/errorHandler.js';
 import { PORT } from './config/env.js';
 
@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes);
 
 app.get('/', (req, res) => {
   res.send('<h1>Welcome to React Admin Dashboard API Service</h1>');
@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 
 app.use(errorHandler);
 
-app.listen(PORT, async () => {
+app.listen(PORT, () => {
+  connectDB();
   console.log(`Server started on port ${PORT}`);
-  await connectDB();
 });
