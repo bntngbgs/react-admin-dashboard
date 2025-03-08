@@ -8,7 +8,7 @@ const authorize = async (req, res, next) => {
     const token = authHeader && authHeader.split(' ')[1];
 
     if (!token) {
-      const error = new Error('Unauthorized');
+      const error = new Error('Access token is missing');
       error.statusCode = 401;
       throw error;
     }
@@ -18,7 +18,7 @@ const authorize = async (req, res, next) => {
     const user = await User.findById(decodedToken.userId);
 
     if (!user) {
-      const error = new Error('Forbidden');
+      const error = new Error('Not allowed to access the resources');
       error.statusCode = 403;
       throw error;
     }

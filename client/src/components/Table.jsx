@@ -30,8 +30,10 @@ const Table = ({ columns, data, children }) => {
             <td className="py-4 whitespace-nowrap">Pakaian</td>
             <td className="py-4 whitespace-nowrap">01 Maret 2025</td>
             <td className="py-4 whitespace-nowrap">01 Maret 2025</td> */}
-            {data.map((item) => (
-              <td className="py-4 whitespace-nowrap">{item}</td>
+            {data.map((item, index) => (
+              <td className="py-4 whitespace-nowrap" key={index}>
+                {item}
+              </td>
             ))}
             {children}
           </tr>

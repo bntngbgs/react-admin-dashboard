@@ -1,4 +1,24 @@
+// import axios from '../api/axios';
+// import useAuth from '../hooks/useAuth';
+import useInterceptors from '../hooks/useInterceptors';
+
 const CategoryForm = () => {
+  // const { user } = useAuth();
+  const axiosPrivate = useInterceptors();
+  // const accessToken = user.accessToken;
+
+  const testApi = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axiosPrivate.get('/api/auth');
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <section className="px-4 md:px-8 mt-12 sm:mt-16">
       <h1 className="text-3xl text-center font-bold text-custom-blue-2">
@@ -29,6 +49,7 @@ const CategoryForm = () => {
         <button
           type="submit"
           className="mt-6 py-2 rounded bg-custom-blue-2 font-semibold tracking-wide text-white-smoke w-full cursor-pointer"
+          onClick={testApi}
         >
           Add category
         </button>

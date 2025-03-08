@@ -41,7 +41,7 @@ const login = async (req, res, next) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      const error = new Error('User not found');
+      const error = new Error('Incorrect email or password');
       error.statusCode = 404;
       throw error;
     }
@@ -49,7 +49,7 @@ const login = async (req, res, next) => {
     const isValidPassword = await bcrypt.compare(password, user.password);
 
     if (!isValidPassword) {
-      const error = new Error('Password invalid');
+      const error = new Error('Incorrect email or password');
       error.statusCode = 401;
       throw error;
     }
@@ -63,6 +63,9 @@ const login = async (req, res, next) => {
     });
 
     await user.updateOne({ refresh_token: refreshToken });
+
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
+    // res.setHeader('Access-Control-Allow-Credentials', true);
 
     res.cookie('jwt', refreshToken, {
       httpOnly: true,

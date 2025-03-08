@@ -4,11 +4,12 @@ import cookieParser from 'cookie-parser';
 import connectDB from './utils/dbConnection.js';
 import authRoutes from './routes/authRoutes.js';
 import errorHandler from './middlewares/errorHandler.js';
+import corsOptions from './config/corsOptions.js';
 import { PORT } from './config/env.js';
 
 const app = express();
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
