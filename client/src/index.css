@@ -27,3 +27,21 @@ body {
 a.active {
   @apply bg-custom-blue-2;
 }
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  /* width: 100px; */
+  aspect-ratio: 1;
+  border-radius: 50%;
+  /* border: 8px solid lightblue; */
+  border-color: lightblue;
+  border-style: solid;
+  border-right-color: var(--color-custom-blue-2);
+  animation: l2 1s infinite linear;
+}
+
+@keyframes l2 {
+  to {
+    transform: rotate(1turn);
+  }
+}

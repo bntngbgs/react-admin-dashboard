@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } from '../config/env.js';
 
-// @api/auth/register -> register new user
+// @api/auth/register -> create new user
 const register = async (req, res, next) => {
   const { name, email, password, phone_number, address } = req.body;
 
@@ -130,7 +130,24 @@ const refreshToken = async (req, res, next) => {
 
 // @api/auth/logout -> logout user
 const logout = async (req, res, next) => {
-  res.json({ message: 'logout route' });
+  const cookies = req.cookies;
+
+  if (!cookies.jwt) res.sendStatus(204);
+
+  const refreshToken = cookies.jwt;
+
+  const user = await User.findOne({ refresh_token: refreshToken });
+
+  if (!user) {
+    res.clearCookie('jwt', { httpOnly: true, secure: false });
+    return res.sendStatus(204);
+  }
+
+  user.refresh_token = undefined;
+  await user.save();
+
+  res.clearCookie('jwt', { httpOnly: true, secure: false });
+  return res.sendStatus(204);
 };
 
 export default { register, login, refreshToken, logout };

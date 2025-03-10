@@ -7,11 +7,32 @@ import { LiaClipboardListSolid } from 'react-icons/lia';
 import { RiLogoutBoxRLine } from 'react-icons/ri';
 import { RiListIndefinite } from 'react-icons/ri';
 import { NavLink } from 'react-router';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import SidebarContext from '../context/SidebarContext';
+import useWindowSize from '../hooks/useWindowSize';
+import useAuth from '../hooks/useAuth';
+import axios from '../api/axios';
 
 const Sidebar = () => {
+  const width = useWindowSize();
   const { isOpen, setIsOpen } = useContext(SidebarContext);
+  const { setUser } = useAuth();
+
+  useEffect(() => {
+    if (width < 1024) {
+      setIsOpen(false);
+    }
+  }, [width]);
+
+  const handleLogout = async () => {
+    setUser({});
+
+    try {
+      await axios.get('api/auth/logout', { withCredentials: true });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div
@@ -54,7 +75,7 @@ const Sidebar = () => {
         </NavLink>
       </div>
       <div className="mt-8 mx-auto flex justify-center">
-        <button className="btn-logout">
+        <button className="btn-logout" onClick={handleLogout}>
           <RiLogoutBoxRLine size={24} />
           <span className="text-xl">Logout</span>
         </button>

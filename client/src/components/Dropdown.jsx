@@ -25,9 +25,9 @@ const Dropdown = () => {
             data-slot="icon"
           >
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-              clip-rule="evenodd"
+              clipRule="evenodd"
             />
           </svg>
         </button>
@@ -40,14 +40,14 @@ const Dropdown = () => {
         role="menu"
         aria-orientation="vertical"
         aria-labelledby="menu-button"
-        tabindex="-1"
+        tabIndex="-1"
       >
         <div className="py-2" role="none">
           <a
             href="#"
             className="block px-5 py-2.5  text-gray-700"
             role="menuitem"
-            tabindex="-1"
+            tabIndex="-1"
             id="menu-item-0"
           >
             Pakaian
@@ -56,7 +56,7 @@ const Dropdown = () => {
             href="#"
             className="block px-5 py-2.5  text-gray-700"
             role="menuitem"
-            tabindex="-1"
+            tabIndex="-1"
             id="menu-item-1"
           >
             Makanan
@@ -65,7 +65,7 @@ const Dropdown = () => {
             href="#"
             className="block px-5 py-2.5  text-gray-700"
             role="menuitem"
-            tabindex="-1"
+            tabIndex="-1"
             id="menu-item-2"
           >
             Aksesoris
@@ -75,7 +75,7 @@ const Dropdown = () => {
               type="submit"
               className="block w-full px-5 py-2.5 text-left  text-gray-700"
               role="menuitem"
-              tabindex="-1"
+              tabIndex="-1"
               id="menu-item-3"
             >
               Sepatu

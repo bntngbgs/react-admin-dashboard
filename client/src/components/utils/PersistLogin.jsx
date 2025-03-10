@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router';
 import useRefreshToken from '../../hooks/useRefreshToken';
 import useAuth from '../../hooks/useAuth';
+import Loader from '../Loader';
 
 const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +23,17 @@ const PersistLogin = () => {
     !user.accessToken ? verifyRefreshToken() : setIsLoading(false);
   }, []);
 
-  return <>{isLoading ? <p>Loading...</p> : <Outlet />}</>;
+  return (
+    <>
+      {isLoading ? (
+        <div className="h-screen w-full flex items-center">
+          <Loader size={100} borderSize={16} />
+        </div>
+      ) : (
+        <Outlet />
+      )}
+    </>
+  );
 };
 
 export default PersistLogin;
