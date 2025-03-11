@@ -5,6 +5,10 @@ import Table from '../components/Table';
 import { IoTrashSharp } from 'react-icons/io5';
 import Pagination from '../components/Pagination';
 import { Link } from 'react-router';
+import { useEffect, useState } from 'react';
+import axios from '../api/axios';
+import useAuth from '../hooks/useAuth';
+import useInterceptors from '../hooks/useInterceptors';
 
 const columns = [
   {
@@ -15,12 +19,13 @@ const columns = [
     heading: 'Name',
     width: 'min-w-56',
   },
+
   {
-    heading: 'Price',
-    width: 'min-w-32',
+    heading: 'Created At',
+    width: 'min-w-24',
   },
   {
-    heading: 'Category',
+    heading: 'Last Update',
     width: 'min-w-24',
   },
   {
@@ -29,9 +34,53 @@ const columns = [
   },
 ];
 
-const tableData = ['CD037', 'Baju Kemeja Flanel XL', 'Rp. 129.000', 'Pakaian'];
+// const tableData = ['CD037', 'Baju Kemeja Flanel XL', 'Rp. 129.000', 'Pakaian'];
 
 const Categories = () => {
+  const [categoryData, setCategoryData] = useState([]);
+  const axiosPrivate = useInterceptors();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    const fetchCategoryData = async () => {
+      try {
+        const response = await axios.get('/api/category', {
+          headers: {
+            Authorization: `Bearer ${user.accessToken}`,
+          },
+          withCredentials: true,
+        });
+
+        setCategoryData(response.data.data);
+
+        // console.log(response.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchCategoryData();
+  }, []);
+
+  const handleDelete = async (e) => {
+    const id = e.target.parentElement.parentElement.id;
+
+    // console.log(id);
+    try {
+      const response = await axiosPrivate.delete(`/api/category/delete/${id}`);
+      // const response = await axios.delete(`/api/category/delete/${id}`, {
+      //   headers: {
+      //     Authorization: `Bearer ${user.accessToken}`,
+      //   },
+      //   withCredentials: true,
+      // });
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <section className="px-4 md:px-8 mt-8">
       <div className="flex items-center justify-between flex-wrap">
@@ -46,15 +95,18 @@ const Categories = () => {
         <SearchBar placeholder={'category'} />
       </div>
       <div className="overflow-auto rounded @container shadow-md mt-6">
-        <Table columns={columns} data={tableData}>
+        <Table columns={columns} data={categoryData}>
           <td className="flex items-center justify-center py-4 whitespace-nowrap gap-2">
             <button className="bg-[#ffc300] text-sm px-2 py-1 rounded flex items-center gap-1.5 text-white-smoke">
-              <FaPen size={12} />
-              <span>Edit</span>
+              <FaPen size={12} className="pointer-events-none" />
+              <span className="pointer-events-none">Edit</span>
             </button>
-            <button className="bg-[#D22B2B] text-sm px-2 py-1 rounded flex items-center gap-1 text-white-smoke">
-              <IoTrashSharp />
-              <span>Delete</span>
+            <button
+              className="bg-[#D22B2B] text-sm px-2 py-1 rounded flex items-center gap-1 text-white-smoke"
+              onClick={handleDelete}
+            >
+              <IoTrashSharp className="pointer-events-none" />
+              <span className="pointer-events-none">Delete</span>
             </button>
           </td>
         </Table>

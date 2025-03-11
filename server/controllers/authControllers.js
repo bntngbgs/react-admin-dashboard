@@ -55,11 +55,11 @@ const login = async (req, res, next) => {
     }
 
     const accessToken = jwt.sign({ userId: user._id }, ACCESS_TOKEN_SECRET, {
-      expiresIn: '30s',
+      expiresIn: '15s',
     });
 
     const refreshToken = jwt.sign({ userId: user._id }, REFRESH_TOKEN_SECRET, {
-      expiresIn: '5m',
+      expiresIn: '30s',
     });
 
     await user.updateOne({ refresh_token: refreshToken });
@@ -110,7 +110,13 @@ const refreshToken = async (req, res, next) => {
 
     jwt.verify(refreshToken, REFRESH_TOKEN_SECRET, (err, payload) => {
       if (err || user._id != payload.userId) {
-        const error = new Error('Forbidden');
+        // user.refresh_token = undefined;
+        // user.save();
+
+        // res.clearCookie('jwt', { httpOnly: true, secure: false });
+        // return res.sendStatus(403).json({ message: 'Invalid refresh token' });
+
+        const error = new Error('Refresh token expired');
         error.statusCode = 403;
         throw error;
       }
@@ -118,7 +124,7 @@ const refreshToken = async (req, res, next) => {
       const accessToken = jwt.sign(
         { userId: payload.userId },
         ACCESS_TOKEN_SECRET,
-        { expiresIn: '30s' }
+        { expiresIn: '15s' }
       );
 
       res.json({ accessToken });

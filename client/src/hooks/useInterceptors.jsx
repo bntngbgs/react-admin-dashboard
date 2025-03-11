@@ -5,7 +5,7 @@ import useAuth from './useAuth';
 
 const useInterceptors = () => {
   const refresh = useRefreshToken();
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
 
   useEffect(() => {
     const requestIntercept = axiosPrivate.interceptors.request.use(
@@ -24,9 +24,15 @@ const useInterceptors = () => {
         const prevRequest = error.config;
         if (error.response.status === 403 && !prevRequest.sent) {
           prevRequest.sent = true;
-          const newAccessToken = await refresh();
-          prevRequest.headers.authorization = `Bearer ${newAccessToken}`;
-          return axiosPrivate(prevRequest);
+
+          try {
+            const newAccessToken = await refresh();
+            prevRequest.headers.authorization = `Bearer ${newAccessToken}`;
+            return axiosPrivate(prevRequest);
+          } catch (refreshError) {
+            setUser({});
+            return Promise.reject(refreshError);
+          }
         }
         return Promise.reject(error);
       }
@@ -36,7 +42,7 @@ const useInterceptors = () => {
       axiosPrivate.interceptors.response.eject(requestIntercept);
       axiosPrivate.interceptors.response.eject(responseIntercept);
     };
-  }, [user, refresh]);
+  }, [user, refresh, setUser]);
 
   return axiosPrivate;
 };

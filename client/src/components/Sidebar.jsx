@@ -15,6 +15,7 @@ import axios from '../api/axios';
 
 const Sidebar = () => {
   const width = useWindowSize();
+
   const { isOpen, setIsOpen } = useContext(SidebarContext);
   const { setUser } = useAuth();
 
@@ -25,10 +26,10 @@ const Sidebar = () => {
   }, [width]);
 
   const handleLogout = async () => {
-    setUser({});
-
     try {
       await axios.get('api/auth/logout', { withCredentials: true });
+
+      setUser({});
     } catch (error) {
       console.log(error);
     }

@@ -22,19 +22,17 @@ const Table = ({ columns, data, children }) => {
         </tr>
       </thead>
       <tbody>
-        {columns.map((_, index) => (
-          <tr className="text-center even:bg-gray-50" key={index}>
-            {/* <td className="py-4 whitespace-nowrap">CD037</td>
-            <td className="py-4 whitespace-nowrap">Baju Kemeja Flanel XL</td>
-            <td className="py-4 whitespace-nowrap">Rp. 129.000</td>
-            <td className="py-4 whitespace-nowrap">Pakaian</td>
-            <td className="py-4 whitespace-nowrap">01 Maret 2025</td>
-            <td className="py-4 whitespace-nowrap">01 Maret 2025</td> */}
-            {data.map((item, index) => (
+        {data.map((item, index) => (
+          <tr className="text-center even:bg-gray-50" key={index} id={item._id}>
+            <td className="py-4 whitespace-nowrap">{item.category_code}</td>
+            <td className="py-4 whitespace-nowrap">{item.category_name}</td>
+            <td className="py-4 whitespace-nowrap">{item.createdAt}</td>
+            <td className="py-4 whitespace-nowrap">{item.updatedAt}</td>
+            {/* {data.map((item, index) => (
               <td className="py-4 whitespace-nowrap" key={index}>
                 {item}
               </td>
-            ))}
+            ))} */}
             {children}
           </tr>
         ))}

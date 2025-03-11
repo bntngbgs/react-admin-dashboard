@@ -6,22 +6,23 @@ import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 
 const Login = () => {
+  const { setUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state.from.pathname || '/';
-
+  const from = location.state?.from?.pathname || '/';
   const [authError, setAuthError] = useState('');
   const [formError, setFormError] = useState({
     email: '',
     password: '',
   });
-
   const [userCredentials, setUserCredentials] = useState({
     email: '',
     password: '',
   });
 
-  const { setUser } = useAuth();
+  // useEffect(() => {
+  //   console.log(location);
+  // });
 
   const handleChange = (e) => {
     setUserCredentials((prevState) => ({

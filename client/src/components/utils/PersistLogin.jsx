@@ -3,6 +3,7 @@ import { Outlet } from 'react-router';
 import useRefreshToken from '../../hooks/useRefreshToken';
 import useAuth from '../../hooks/useAuth';
 import Loader from '../Loader';
+// import { axiosPrivate } from '../../api/axios';
 
 const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -14,6 +15,7 @@ const PersistLogin = () => {
       try {
         await refresh();
       } catch (error) {
+        // axiosPrivate.get('/api/auth/logout');
         console.log(error);
       } finally {
         setIsLoading(false);

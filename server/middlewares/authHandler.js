@@ -9,7 +9,7 @@ const authorize = async (req, res, next) => {
 
     if (!token) {
       const error = new Error('Access token is missing');
-      error.statusCode = 401;
+      error.statusCode = 403;
       throw error;
     }
 
