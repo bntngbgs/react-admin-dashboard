@@ -6,8 +6,8 @@ import { IoTrashSharp } from 'react-icons/io5';
 import Pagination from '../components/Pagination';
 import { Link } from 'react-router';
 import { useEffect, useState } from 'react';
-import axios from '../api/axios';
-import useAuth from '../hooks/useAuth';
+// import axios from '../api/axios';
+// import useAuth from '../hooks/useAuth';
 import useInterceptors from '../hooks/useInterceptors';
 
 const columns = [
@@ -38,29 +38,31 @@ const columns = [
 
 const Categories = () => {
   const [categoryData, setCategoryData] = useState([]);
+  const [dataLength, setDataLength] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState('');
   const axiosPrivate = useInterceptors();
-  const { user } = useAuth();
+  // const { user } = useAuth();
 
   useEffect(() => {
     const fetchCategoryData = async () => {
       try {
-        const response = await axios.get('/api/category', {
-          headers: {
-            Authorization: `Bearer ${user.accessToken}`,
-          },
-          withCredentials: true,
-        });
+        const categoryLength = await axiosPrivate.get('/api/category');
+        const data = await axiosPrivate.get(
+          `/api/category?skip=${(currentPage - 1) * 8}`
+        );
 
-        setCategoryData(response.data.data);
+        setCategoryData(data.data.data);
+        setDataLength(categoryLength.data.count);
 
-        // console.log(response.data.data);
+        console.log(data.data);
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchCategoryData();
-  }, []);
+  }, [currentPage, categoryData.length]);
 
   const handleDelete = async (e) => {
     const id = e.target.parentElement.parentElement.id;
@@ -81,6 +83,22 @@ const Categories = () => {
     }
   };
 
+  const handleSearch = (query) => {
+    const searchResult = categoryData.filter(
+      // (item) => item.category_name.toLowerCase() == query.toLowerCase()
+      (item) => item.category_name.toLowerCase().includes(query)
+    );
+
+    setSearchQuery(searchResult);
+    if (query == '') {
+      console.log(1);
+      setDataLength(categoryData.length);
+    } else {
+      setDataLength(searchResult.length);
+      console.log(dataLength);
+    }
+  };
+
   return (
     <section className="px-4 md:px-8 mt-8">
       <div className="flex items-center justify-between flex-wrap">
@@ -92,10 +110,13 @@ const Categories = () => {
         </Link>
       </div>
       <div className="mt-10 flex items-center gap-4">
-        <SearchBar placeholder={'category'} />
+        <SearchBar placeholder={'category'} handleSearch={handleSearch} />
       </div>
       <div className="overflow-auto rounded @container shadow-md mt-6">
-        <Table columns={columns} data={categoryData}>
+        <Table
+          columns={columns}
+          data={searchQuery.length ? searchQuery : categoryData}
+        >
           <td className="flex items-center justify-center py-4 whitespace-nowrap gap-2">
             <button className="bg-[#ffc300] text-sm px-2 py-1 rounded flex items-center gap-1.5 text-white-smoke">
               <FaPen size={12} className="pointer-events-none" />
@@ -111,7 +132,11 @@ const Categories = () => {
           </td>
         </Table>
       </div>
-      <Pagination />
+      <Pagination
+        length={dataLength}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </section>
   );
 };

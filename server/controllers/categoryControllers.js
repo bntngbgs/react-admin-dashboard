@@ -25,10 +25,22 @@ const create = async (req, res, next) => {
 };
 
 const getAll = async (req, res, next) => {
-  try {
-    const allCategory = await Category.find({});
+  let { skip = 0, limit = 8, q = '' } = req.query;
+  let searchQuery = {};
 
-    res.json({ success: true, data: allCategory });
+  if (q.length) {
+    searchQuery = { category_name: { $regex: `${q}`, $options: 'i' } };
+  }
+
+  try {
+    const countData = await Category.countDocuments();
+    const categoryData = await Category.find(searchQuery)
+      .skip(parseInt(skip))
+      .limit(parseInt(limit));
+
+    // const categoryData = allCategory.skip(8);
+
+    res.json({ success: true, data: categoryData, count: countData });
   } catch (error) {
     next(error);
   }

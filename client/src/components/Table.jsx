@@ -26,8 +26,26 @@ const Table = ({ columns, data, children }) => {
           <tr className="text-center even:bg-gray-50" key={index} id={item._id}>
             <td className="py-4 whitespace-nowrap">{item.category_code}</td>
             <td className="py-4 whitespace-nowrap">{item.category_name}</td>
-            <td className="py-4 whitespace-nowrap">{item.createdAt}</td>
-            <td className="py-4 whitespace-nowrap">{item.updatedAt}</td>
+            <td className="py-4 whitespace-nowrap">
+              {new Date(item.createdAt).toLocaleString('en-GB', {
+                hour12: false,
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+            </td>
+            <td className="py-4 whitespace-nowrap">
+              {new Date(item.updatedAt).toLocaleString('en-GB', {
+                hour12: false,
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+            </td>
             {/* {data.map((item, index) => (
               <td className="py-4 whitespace-nowrap" key={index}>
                 {item}

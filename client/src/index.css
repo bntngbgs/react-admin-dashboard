@@ -28,6 +28,10 @@ a.active {
   @apply bg-custom-blue-2;
 }
 
+.active-paginate {
+  @apply bg-custom-blue-4;
+}
+
 /* HTML: <div class="loader"></div> */
 .loader {
   /* width: 100px; */

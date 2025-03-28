@@ -31,9 +31,11 @@ const useInterceptors = () => {
             return axiosPrivate(prevRequest);
           } catch (refreshError) {
             setUser({});
+            console.log('from interceptors');
             return Promise.reject(refreshError);
           }
         }
+        console.log('from interceptors 2');
         return Promise.reject(error);
       }
     );
